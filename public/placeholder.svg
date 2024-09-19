@@ -1,0 +1,18 @@
+ app/
+├── components/
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── Hero.tsx
+│   ├── Features.tsx
+│   ├── Offerings.tsx
+│   ├── Benefits.tsx
+│   ├── HowItWorks.tsx
+│   ├── Testimonials.tsx
+│   ├── Team.tsx
+│   └── CallToAction.tsx
+├── layout.tsx
+└── page.tsx
+
+public/
+├── placeholder.svg
+
