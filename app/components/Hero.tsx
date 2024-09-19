@@ -1,23 +1,22 @@
 import { Button } from "./ui/button"
 
-export default function Hero() {
+interface HeroProps {
+  onGetStarted: () => void;
+}
+
+export default function Hero({ onGetStarted }: HeroProps) {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-              Welcome to PDF Editor
-            </h1>
-            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-              Edit, convert, and manage your PDFs with ease. Our powerful tools make document handling a breeze.
-            </p>
-          </div>
-          <Button className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300">
-            Get Started
-          </Button>
-        </div>
+    <div className="bg-gradient-to-b from-purple-100 via-pink-50 to-red-50 py-32 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700">
+      <div className="container mx-auto text-center px-4">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 text-purple-800 dark:text-purple-300">Welcome to Our PDF Tool</h1>
+        <p className="text-xl md:text-2xl mb-12 text-purple-600 dark:text-purple-200 max-w-3xl mx-auto">Easily manage and edit your PDF files with our powerful and intuitive tools</p>
+        <Button 
+          onClick={onGetStarted} 
+          className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white px-10 py-4 rounded-full text-xl font-semibold hover:from-purple-700 hover:via-pink-600 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl dark:from-purple-800 dark:via-pink-700 dark:to-red-700 dark:hover:from-purple-900 dark:hover:via-pink-800 dark:hover:to-red-800"
+        >
+          Get Started
+        </Button>
       </div>
-    </section>
+    </div>
   )
 }

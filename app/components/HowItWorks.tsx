@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import { uploadPDF } from '../services/api';
+import PDFUpload from './PDFUpload';
+
 export default function HowItWorks() {
     return (
       <section className="w-full py-12 md:py-24 lg:py-32">
@@ -10,6 +14,7 @@ export default function HowItWorks() {
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 text-white">1</div>
               <h3 className="text-xl font-bold">Upload</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 text-center">Select and upload your PDF file to our secure platform.</p>
+              <PDFUpload /> {/* Added PDFUpload component */}
             </div>
             <div className="flex flex-col items-center space-y-2">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 text-white">2</div>
