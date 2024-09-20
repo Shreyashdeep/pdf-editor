@@ -19,7 +19,6 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900">
       <Hero onGetStarted={handleGetStarted} onFileUpload={handleFileUpload} />
-      <Sidebar isVisible={isSidebarVisible} onFileUpload={handleFileUpload} />
     </div>
   );
 }
