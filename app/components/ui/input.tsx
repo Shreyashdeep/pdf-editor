@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from "react";
 
-// Removed the import statement causing the error
-import { cn } from "@/lib/utils"
+// Updated the import statement to match the relative path
+import { cn } from "../../../lib/utils";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -18,9 +18,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-Input.displayName = "Input"
+);
+Input.displayName = "Input";
 
-export { Input }
+export { Input };

@@ -1,14 +1,16 @@
 import React from 'react';
 import { Button } from "./ui/button";
 import { usePdfMerge } from '../src/hooks/usePdfMerge';
-
+import { useState } from 'react';
 interface PdfMergeProps {
   files: File[];
   onMergeComplete: (mergedPdf: Blob) => void;
 }
 
 export default function PdfMerge({ files, onMergeComplete }: PdfMergeProps) {
-  const { mergePdfs, isLoading, error } = usePdfMerge();
+  const { mergePdfs } = usePdfMerge();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleMerge = async () => {
     if (files.length < 2) {

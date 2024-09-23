@@ -4,13 +4,18 @@ import PdfMerge from "./PdfMerge";
 
 interface HeroProps {
   onGetStarted: () => void;
-  onFileUpload?: (file: File) => void; // Make this prop optional
+  onFileUpload: (files: FileList) => void;
   onMergeClick: () => void;
+  uploadedFiles: File[];
 }
 
-export default function Hero({ onGetStarted, onFileUpload, onMergeClick }: HeroProps) {
+export default function Hero({
+  onGetStarted,
+  onFileUpload,
+  onMergeClick,
+  uploadedFiles,
+}: HeroProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [pdfUrls, setPdfUrls] = useState<string[]>([]);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
 
@@ -20,16 +25,8 @@ export default function Hero({ onGetStarted, onFileUpload, onMergeClick }: HeroP
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      const newFiles = Array.from(files);
-      setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-      const newUrls = newFiles.map((file) => URL.createObjectURL(file));
-      setPdfUrls((prevUrls) => [...prevUrls, ...newUrls]);
-      // Only call onFileUpload if it's defined
-      if (onFileUpload && typeof onFileUpload === "function") {
-        newFiles.forEach((file) => onFileUpload(file));
-      }
+    if (event.target.files) {
+      onFileUpload(event.target.files);
     }
   };
 
@@ -74,28 +71,19 @@ export default function Hero({ onGetStarted, onFileUpload, onMergeClick }: HeroP
         />
         {uploadedFiles.length > 0 && (
           <div className="mt-16">
-            {uploadedFiles.map((file, index) => (
-              <div key={index} className="mb-16">
-                <h2 className="text-3xl font-bold mb-6 text-purple-800 dark:text-purple-300">
-                  Uploaded PDF
-                </h2>
-                <p className="text-lg text-purple-600 dark:text-purple-200 mb-4">
-                  {file.name}
-                </p>
-                <div className="w-full max-w-6xl mx-auto aspect-[16/9] bg-white shadow-lg rounded-lg overflow-hidden">
-                  <iframe
-                    src={pdfUrls[index]}
-                    className="w-full h-full"
-                    title={`Uploaded PDF ${index + 1}`}
-                    style={{ border: "none" }}
-                  />
-                </div>
-              </div>
-            ))}
+            <h2>Uploaded Files:</h2>
+            <ul>
+              {uploadedFiles.map((file, index) => (
+                <li key={index}>{file.name}</li>
+              ))}
+            </ul>
           </div>
         )}
         {uploadedFiles.length > 1 && (
-          <PdfMerge files={uploadedFiles} onMergeComplete={handleMergeComplete} />
+          <PdfMerge
+            files={uploadedFiles}
+            onMergeComplete={handleMergeComplete}
+          />
         )}
         {mergedPdfUrl && (
           <div className="mt-16">
