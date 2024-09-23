@@ -7,9 +7,10 @@ import {
 
 interface SidebarProps {
   isVisible: boolean;
+  onMergeClick: () => void;
 }
 
-export default function Sidebar({ isVisible }: SidebarProps) {
+export default function Sidebar({ isVisible, onMergeClick }: SidebarProps) {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-purple-600 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-700 dark:to-gray-900 shadow-2xl flex flex-col transition-all duration-300 ease-in-out ${
@@ -21,7 +22,10 @@ export default function Sidebar({ isVisible }: SidebarProps) {
         <h2 className="text-3xl font-bold text-white mb-6 relative z-10">
           PDF Tools
         </h2>
-        <Button className="bg-white dark:bg-gray-700 text-pink-500 dark:text-pink-300 border-none shadow-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:bg-pink-100 dark:hover:bg-gray-600 font-semibold text-lg relative z-10">
+        <Button
+          onClick={onMergeClick}
+          className="bg-white dark:bg-gray-700 text-pink-500 dark:text-pink-300 border-none shadow-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:bg-pink-100 dark:hover:bg-gray-600 font-semibold text-lg relative z-10"
+        >
           <FiLayers className="mr-3 text-2xl" /> Merge PDFs
         </Button>
         <Button className="bg-white dark:bg-gray-700 text-red-500 dark:text-red-300 border-none shadow-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:bg-red-100 dark:hover:bg-gray-600 font-semibold text-lg relative z-10">

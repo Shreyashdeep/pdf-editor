@@ -7,12 +7,12 @@ import CallToAction from './components/CallToAction'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Sidebar from './components/Sidebar'
-import Notification from './components/Notification'
 
 export default function Home() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [isNotificationVisible, setIsNotificationVisible] = useState(true)
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
   const controlSidebar = () => {
     if (typeof window !== 'undefined') {
@@ -41,20 +41,21 @@ export default function Home() {
     setIsNotificationVisible(false)
   }
 
+  const handleMergeClick = () => {
+    // Trigger the merge operation
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <Header />
       <main className="flex-grow">
-        <Hero onGetStarted={hideNotification} />
+        <Hero onGetStarted={hideNotification} onMergeClick={handleMergeClick} />
         <Features />
         <Benefits />
         <CallToAction />
       </main>
-      <Sidebar isVisible={isSidebarVisible} />
+      <Sidebar isVisible={isSidebarVisible} onMergeClick={handleMergeClick} />
       <Footer />
-      {isNotificationVisible && (
-        <Notification message="Click Get Started to add PDF" onClose={hideNotification} />
-      )}
     </div>
   )
 }
